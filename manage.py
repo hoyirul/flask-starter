@@ -8,6 +8,9 @@ app = Flask(__name__)
 # Muat variabel lingkungan dari file .env
 load_dotenv()
 
+# Generate a secure random key
+app.secret_key = 'AGSwydgebhb237yu43jbjds7&shdabsh7ask'  # Menghasilkan kunci dengan panjang 16 byte
+
 # Registrasi blueprint
 app.register_blueprint(main)
 
@@ -27,4 +30,4 @@ if __name__ == '__main__':
         host = host_ip
         port = 80 if app_port is None else int(app_port)
 
-    app.run(debug=True if debug_mode == 'development' else False, host=host)
+    app.run(debug=True if debug_mode == 'development' else False, host=host, port=port)

@@ -1,10 +1,22 @@
 from flask import Blueprint, request
 from controllers.user_controller import UserController
 from controllers.about_controller import AboutController
+from controllers.welcome_controller import WelcomeController
+from controllers.auth_controller import AuthController
 
 main = Blueprint('main', __name__)
 userController = UserController()
 aboutController = AboutController()
+welcomeController = WelcomeController()
+authController = AuthController()
+
+@main.route('/')
+def index():
+    return authController.index()
+
+@main.route('/auth/login', methods=['POST'])
+def auth_login():
+    return authController.auth_login()
 
 @main.route('/user/<int:user_id>')
 def get_user(user_id):
