@@ -1,0 +1,11 @@
+# .gitignore
+
+# Folder virtual environment
+venv/
+
+# File environment (opsional, jika digunakan)
+.env
+
+# Folder bytecode dan cache Python
+__pycache__/
+*.pyc
