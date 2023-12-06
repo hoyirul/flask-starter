@@ -3,27 +3,38 @@ from controllers.user_controller import UserController
 from controllers.about_controller import AboutController
 from controllers.welcome_controller import WelcomeController
 from controllers.auth_controller import AuthController
+from controllers.compressor_af_controller import CompressorAfController
+from middlewares.middleware import AuthMiddleware
 
 main = Blueprint('main', __name__)
 userController = UserController()
 aboutController = AboutController()
 welcomeController = WelcomeController()
 authController = AuthController()
+compressorAfController = CompressorAfController()
+authMiddleware = AuthMiddleware()
 
 @main.route('/', methods=['GET'])
+@authMiddleware.authorized
 def index():
-    # if 'user_id' in session:
     return welcomeController.index()
-    # else:
-        # return redirect('/login')
 
 @main.route('/login', methods=['GET'])
+@authMiddleware.unauthorized
 def login():
     return authController.index()
 
 @main.route('/auth/login', methods=['POST'])
 def auth_login():
     return authController.auth_login()
+
+@main.route('/auth/logout', methods=['GET'])
+def auth_logout():
+    return authController.auth_logout()
+
+@main.route('/compressors', methods=['GET'])
+def compressors():
+    return compressorAfController.index()
 
 @main.route('/user/<int:user_id>', methods=['GET'])
 def get_user(user_id):

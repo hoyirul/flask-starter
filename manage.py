@@ -2,14 +2,26 @@ from flask import Flask
 from routes.route import main  # Import blueprint yang telah Anda buat
 from dotenv import load_dotenv
 import os
+from utils.handler_error import HandlerError
 
+# Inisialisasi Flask
 app = Flask(__name__)
+
+# Registrasi handler error
+handlerError = HandlerError()
+@app.errorhandler(404)
+def not_found_error(error):
+    return handlerError.not_found_error(error=error)
+
+@app.errorhandler(500)
+def internal_error(error):
+    return handlerError.internal_error(error=error)
 
 # Muat variabel lingkungan dari file .env
 load_dotenv()
 
 # Generate a secure random key
-app.secret_key = 'AGSwydgebhb237yu43jbjds7&shdabsh7ask'  # Menghasilkan kunci dengan panjang 16 byte
+app.secret_key = os.getenv("SECRET_KEY")  # Menghasilkan kunci dengan panjang 16 byte
 
 # Registrasi blueprint
 app.register_blueprint(main)

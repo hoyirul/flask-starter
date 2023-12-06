@@ -1,5 +1,6 @@
-from flask import render_template, request, redirect, session
+from flask import render_template, request, redirect, session, flash
 import requests
+from utils.handler_api import endpoint_login
 
 class AuthController:
     def index(self):
@@ -9,20 +10,20 @@ class AuthController:
         nik = request.form['nik']
         password = request.form['password']
 
-        api_url = 'http://192.168.9.47:3270/users/login'
         payload = {'nik': nik, 'password': password}
         headers = {'Content-Type': 'application/json'}
         
-        response = requests.post(api_url, json=payload, headers=headers)
+        response = requests.post(endpoint_login, json=payload, headers=headers)
         
         if response.status_code == 200:
             session['nik'] = nik
             session['token'] = response.json().get('token')  # Menggunakan get untuk menghindari KeyError
             session['logged_in'] = True
-            return redirect('/dashboard')  # Redirect setelah login berhasil
+            return redirect('/')  # Redirect setelah login berhasil
         else:
-            session['errors'] = 'Login gagal, cek username dan password!'
-            return redirect('/')
+            flash(response.json().get('message'), 'danger')
+            return redirect('/login')
     
     def auth_logout(self):
-        pass
+        session.clear()
+        return redirect('/login')
