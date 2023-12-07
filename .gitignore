@@ -9,3 +9,7 @@ venv/
 # Folder bytecode dan cache Python
 __pycache__/
 *.pyc
+
+
+# Folder Uploads
+static/uploads/
