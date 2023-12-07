@@ -1,42 +1,48 @@
-<!-- errors/500.html -->
+<!-- errors/404.html -->
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Error 500 - Internal Server Error</title>
-    <style>
-        /* CSS untuk responsivitas */
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f8f9fa;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Error 500 - Internal Server Error</title>
+  <link rel="stylesheet" href="static/assets/css/styles.min.css" />
+  <style>
+    /* CSS untuk konten di tengah layar */
+    body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+        background-color: #f8f9fa; /* Ganti dengan warna latar belakang yang diinginkan */
+    }
 
-        .error-container {
-            text-align: center;
-        }
+    .error-message {
+        text-align: center;
+        background-color: transparent;
+        padding: 20px;
+    }
+    
+    h1, h2{
+      font-weight: bold;
+      font-size: 30pt;
+    }
 
-        h1 {
-            color: #dc3545;
-        }
-
-        p {
-            color: #6c757d;
-        }
-    </style>
+    p{
+      font-size: 13pt;
+    }
+  </style>
 </head>
 
 <body>
-    <div class="error-container">
-        <h1>Error 500 - Internal Server Error</h1>
-        <p>Sorry, something went wrong on our server.</p>
-    </div>
+  <div class="error-message">
+    <h1 style="color: #f43f5e">500</h1>
+    <h2>Internal Server Error</h2>
+    <p>Maaf, ada yang tidak beres pada server kami.</p>
+    <!-- Tombol kembali ke halaman sebelumnya (Opsional) -->
+    <a href="javascript:history.go(-1)" class="btn btn-primary">Kembali</a>
+  </div>
 </body>
 
 </html>

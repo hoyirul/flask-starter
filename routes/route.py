@@ -4,6 +4,7 @@ from controllers.about_controller import AboutController
 from controllers.welcome_controller import WelcomeController
 from controllers.auth_controller import AuthController
 from controllers.compressor_af_controller import CompressorAfController
+from controllers.theme_anomaly_controller import ThemeAnomalyController
 from middlewares.middleware import AuthMiddleware
 
 main = Blueprint('main', __name__)
@@ -12,6 +13,7 @@ aboutController = AboutController()
 welcomeController = WelcomeController()
 authController = AuthController()
 compressorAfController = CompressorAfController()
+themeAnomalyController = ThemeAnomalyController()
 authMiddleware = AuthMiddleware()
 
 @main.route('/', methods=['GET'])
@@ -32,9 +34,15 @@ def auth_login():
 def auth_logout():
     return authController.auth_logout()
 
-@main.route('/compressors', methods=['GET'])
-def compressors():
+@main.route('/compressor-af', methods=['GET', 'POST'])
+@authMiddleware.authorized
+def compressor_af():
     return compressorAfController.index()
+
+@main.route('/theme-anomalies', methods=['GET', 'POST'])
+@authMiddleware.authorized
+def theme_anomalies():
+    return themeAnomalyController.index()
 
 @main.route('/user/<int:user_id>', methods=['GET'])
 def get_user(user_id):

@@ -21,9 +21,9 @@
             <div class="card mb-0">
               <div class="card-body">
                 <a href="/" class="text-nowrap logo-img text-center d-block py-3 w-100">
-                  <img src="static/assets/images/logos/dark-logo.svg" width="180" alt="">
+                  <img src="static/assets/images/logos/ml-logo.png" width="180" alt="">
                 </a>
-                <p class="text-center">Your Social Campaigns</p>
+                <p class="text-center">Welcome back to Machine Learning AIO</p>
                 {% if 'errors' in session %}
                   <div class="alert alert-danger" role="alert">
                     {{ session['errors'] }}
@@ -40,6 +40,7 @@
                   {% endif %}
                 {% endwith %}
                 <form id="login-form" action="/auth/login" method="POST">
+                  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                   <div class="mb-3">
                     <label for="exampleInputUsername" class="form-label">Username</label>
                     <input type="text" class="form-control" required name="nik" id="exampleInputUsername" aria-describedby="usernameHelp">

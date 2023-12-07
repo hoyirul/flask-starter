@@ -3,9 +3,11 @@ from routes.route import main  # Import blueprint yang telah Anda buat
 from dotenv import load_dotenv
 import os
 from utils.handler_error import HandlerError
+from flask_wtf import CSRFProtect
 
 # Inisialisasi Flask
 app = Flask(__name__)
+csrf = CSRFProtect(app)
 
 # Registrasi handler error
 handlerError = HandlerError()
@@ -16,6 +18,14 @@ def not_found_error(error):
 @app.errorhandler(500)
 def internal_error(error):
     return handlerError.internal_error(error=error)
+
+@app.errorhandler(405)
+def method_not_allowed(error):
+    return handlerError.method_not_allowed(error=error)
+
+@app.errorhandler(400)
+def bad_request(error):
+    return handlerError.bad_request(error=error)
 
 # Muat variabel lingkungan dari file .env
 load_dotenv()
