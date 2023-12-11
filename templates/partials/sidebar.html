@@ -4,7 +4,7 @@
   <div>
     <div class="brand-logo d-flex align-items-center justify-content-between">
       <a href="/" class="text-nowrap logo-img">
-        <img src="static/assets/images/logos/mindwise.png" width="200" class="mt-3" alt="" />
+        <img src="{{ url_for('static', filename='assets/images/logos/mindwise.png') }}" width="200" class="mt-3" alt="" />
       </a>
       <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
         <i class="ti ti-x fs-8"></i>
@@ -29,19 +29,6 @@
           <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
           <span class="hide-menu">Anomaly Detection</span>
         </li>
-
-        <!-- <li class="sidebar-item dropdown">
-          <a class="sidebar-link dropdown-toggle" href="javascript:void(0)" id="dropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-              <span>
-                  <i class="ti ti-apps"></i>
-              </span>
-              <span class="hide-menu">Compressors</span>
-          </a>
-          <div class="dropdown-menu w-100" aria-labelledby="dropdownMenuLink">
-              <a class="dropdown-item" href="/compressor-af">Sub Item 1</a>
-              <a class="dropdown-item" href="/compressor-bf">Sub Item 2</a>
-          </div>
-        </li> -->
         <li class="sidebar-item">
           <a class="sidebar-link" href="/theme-anomalies" aria-expanded="false">
             <span>
@@ -50,15 +37,33 @@
             <span class="hide-menu">Upload Files</span>
           </a>
         </li>
-        
-        <li class="sidebar-item">
+        <li class="sidebar-item dropdown">
+          <a class="sidebar-link sidebar-icon-hover" href="javascript:void(0)" onclick="toggleDropdown()"
+            aria-expanded="false">
+            <span>
+              <i class="ti ti-apps"></i>
+            </span>
+            <span class="hide-menu">Compressors</span>
+            <span class="mt-1 chevron-icon">
+              <i style="font-size: 10pt !important;" class="ti ti-chevron-down"></i>
+            </span>
+          </a>
+          <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up w-100" id="dropdownMenu">
+            <div class="message-body">
+              <a class="dropdown-item" href="/compressor-af/1">DX1 AF1</a>
+              <a class="dropdown-item" href="/compressor-af/2">DX1 AF2</a>
+            </div>
+          </div>
+        </li>
+
+        <!-- <li class="sidebar-item">
           <a class="sidebar-link" href="/compressor-af" aria-expanded="false">
             <span>
               <i class="ti ti-apps"></i>
             </span>
             <span class="hide-menu">Compressors</span>
           </a>
-        </li>
+        </li> -->
         <li class="sidebar-item">
           <a class="sidebar-link" href="/chiller-maglev" aria-expanded="false">
             <span>
@@ -67,7 +72,7 @@
             <span class="hide-menu">Chiller Maglev</span>
           </a>
         </li>
-        
+
         <li class="nav-small-cap">
           <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
           <span class="hide-menu">Predictions</span>

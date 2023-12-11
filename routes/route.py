@@ -30,10 +30,10 @@ def auth_login():
 def auth_logout():
     return authController.auth_logout()
 
-@main.route('/compressor-af', methods=['GET', 'POST'])
+@main.route('/compressor-af/<int:id>', methods=['GET', 'POST'])
 @authMiddleware.authorized
-def compressor_af():
-    return compressorAfController.index()
+def compressor_af(id):
+    return compressorAfController.index(id)
 
 @main.route('/theme-anomalies', methods=['GET', 'POST'])
 @authMiddleware.authorized

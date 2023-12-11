@@ -2,15 +2,12 @@ from flask import render_template, request, redirect, session, flash
 import requests
 from utils.handler_api import server_data
 from utils.anomaly_detection import AnomalyDetection
-from models.dx1_af1_model import DX1AF1ApiModel
 import pandas as pd
 from datetime import datetime
 import os
 
 class ThemeAnomalyController:
     def index(self):
-        dx1_model = DX1AF1ApiModel(api_url=server_data)
-        
         train_file_path, test_file_path = '', ''
 
         if request.method == 'POST':

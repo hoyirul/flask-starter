@@ -5,8 +5,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Login | Data Science | PT. Amerta Indah Otsuka</title>
-  <link rel="shortcut icon" type="image/png" href="static/assets/images/logos/new-favicon.png" />
-  <link rel="stylesheet" href="static/assets/css/styles.min.css" />
+  <link rel="shortcut icon" type="image/png" href="{{ url_for('static', filename='assets/images/logos/new-favicon.png') }}" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/styles.min.css') }}" />
 </head>
 
 <body>
@@ -66,8 +66,9 @@
       </div>
     </div>
   </div>
-  <script src="static/assets/libs/jquery/dist/jquery.min.js"></script>
-  <script src="static/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  
+  <script src="{{ url_for('static', filename='assets/libs/jquery/dist/jquery.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
 </body>
 
 </html>

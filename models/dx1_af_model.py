@@ -4,13 +4,13 @@ import datetime
 
 now = datetime.datetime.now()  # Mendapatkan tanggal dan jam saat ini
 
-class DX1AF1ApiModel:
+class DX1AFApiModel:
     def __init__(self, api_url):
         self.api_url = api_url
 
     def fetch_data(self, start_date, end_date):
         try:
-            response = requests.get(f"{self.api_url}/kpi/test", params={"start": start_date, "end": end_date})
+            response = requests.get(self.api_url, params={"start": start_date, "end": end_date})
             if response.status_code == 200:
                 data = response.json()
                 df = pd.DataFrame(data)  # asumsikan API mengembalikan data dalam format DataFrame
@@ -28,7 +28,7 @@ class DX1AF1ApiModel:
             # Jika kamu ingin menggunakan tanggal saat ini, atur start_date dan end_date sesuai kebutuhan
             start_date = datetime.datetime.now().strftime('%Y-%m-%d')
             end_date = datetime.datetime.now().strftime('%Y-%m-%d')
-            response = requests.get(f"{self.api_url}/kpi/test", params={"start": start_date, "end": end_date})
+            response = requests.get(self.api_url, params={"start": start_date, "end": end_date})
             if response.status_code == 200:
                 data = response.json()
                 df = pd.DataFrame(data)  # asumsikan API mengembalikan data dalam format DataFrame
