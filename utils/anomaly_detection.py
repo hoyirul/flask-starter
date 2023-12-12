@@ -44,18 +44,22 @@ class AnomalyDetection:
     def parameters_scalar(self, model, data_train_features, data_test_features, df_test):
         data_test_anomali = data_test_features[df_test['anomali'] == -1]
 
-        # Mendapatkan SHAP values untuk data test yang merupakan anomali
-        explainer = shap.Explainer(model, data_train_features)
-        shap_values_anomali = explainer.shap_values(data_test_anomali)
-        scaler = MinMaxScaler(feature_range=(0, 1))
+        if not data_test_anomali.empty:
+            # Mendapatkan SHAP values untuk data test yang merupakan anomali
+            explainer = shap.Explainer(model, data_train_features)
+            shap_values_anomali = explainer.shap_values(data_test_anomali)
+            scaler = MinMaxScaler(feature_range=(0, 1))
 
-        shap_df_anomali = pd.DataFrame(list(zip(data_train_features.columns, np.mean(np.abs(shap_values_anomali), axis=0))),
-                                    columns=['features', 'mean_shap_value'])
-        # Menormalisasi kolom Mean SHAP Value ke rentang 0-1
-        shap_df_anomali['scalar'] = scaler.fit_transform(shap_df_anomali[['mean_shap_value']])
-        shap_df_anomali = shap_df_anomali.sort_values('scalar', ascending=False)
-        
-        return shap_df_anomali
+            shap_df_anomali = pd.DataFrame(list(zip(data_train_features.columns, np.mean(np.abs(shap_values_anomali), axis=0))),
+                                            columns=['features', 'mean_shap_value'])
+            # Menormalisasi kolom Mean SHAP Value ke rentang 0-1
+            shap_df_anomali['scalar'] = scaler.fit_transform(shap_df_anomali[['mean_shap_value']])
+            shap_df_anomali = shap_df_anomali.sort_values('scalar', ascending=False)
+            
+            return shap_df_anomali
+        else:
+            # Tidak ada data yang terdeteksi sebagai anomali, atur nilai default atau kembalikan pesan
+            return pd.DataFrame(columns=['features', 'mean_shap_value', 'scalar'])
 
     def plot_parameters_scalar(self, features, mean_shap_value, scalar):
         # Menggunakan data yang telah disediakan

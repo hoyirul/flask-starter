@@ -19,7 +19,6 @@ class CompressorAfController:
             df_test = dx1_model.fetch_data_now()
 
         data = None
-
         if df_test.empty:
             data = {
                 'date': datetime.today().strftime('%Y-%m-%d'),
@@ -48,6 +47,8 @@ class CompressorAfController:
             
             parameters = anomalyDetection.parameters_scalar(model, data_train_features, data_test_features, df_test)
             plot_parameters = anomalyDetection.plot_parameters_scalar(parameters['features'], parameters['mean_shap_value'], parameters['scalar'])
+
+            print(parameters)
 
             root_cause_path = 'static/datasets/root-cause-af.xlsm'
             causes_recommendations = anomalyDetection.get_causes_and_recommendations(root_cause=root_cause_path, shap_df_anomali=parameters)
