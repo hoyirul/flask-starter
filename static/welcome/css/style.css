@@ -1,0 +1,37 @@
+.welcome-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.content {
+  text-align: center;
+}
+.title {
+  color: #1e293b;
+  font-size: 2rem;
+  margin-bottom: 10px;
+  margin-top: 30px;
+  font-weight: 500;
+}
+.links {
+  margin-top: 15px;
+}
+.links a {
+  margin: 0 5px;
+}
+/* Style for custom link buttons */
+.custom-btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #475569;
+  border-radius: 10px;
+  text-decoration: none;
+  color: #fff;
+  transition: all 0.3s ease;
+}
+.custom-btn:hover {
+  background-color: #334155;
+  text-decoration: none;
+  color: #fff;
+}

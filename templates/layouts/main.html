@@ -1,67 +1,25 @@
 <!doctype html>
-<html lang="en">
-
+<!DOCTYPE html>
+<html>
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Data Science | PT. Amerta Indah Otsuka</title>
-  <link rel="shortcut icon" type="image/png" href="{{ url_for('static', filename='assets/images/logos/new-favicon.png') }}" />
-  <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/styles.min.css') }}" />
-  <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/scrollbar.css') }}" />
-  <script src="https://cdn.plot.ly/plotly-2.27.0.min.js" charset="utf-8"></script>
-  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap4.min.css">
+  <title>Welcome to Flask</title>
+  <link
+    rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+  />
+  <link rel="stylesheet" href="{{ url_for('static', filename='welcome/css/style.css') }}">
 </head>
-
 <body>
-  <!--  Body Wrapper -->
-  <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
-    data-sidebar-position="fixed" data-header-position="fixed">
+  <div class="welcome-container">
+    <!-- {% include 'partials/navbar.html'   %} -->
 
-    {% include 'partials/sidebar.html' %}
+    {% block content %}
+      
+    {% endblock %}
 
-    <!--  Main wrapper -->
-    <div class="body-wrapper" id="content">
-
-      {% include 'partials/navbar.html' %}
-
-      <div class="container-fluid">
-        {% block content %}{% endblock %}
-
-        {% include 'partials/footer.html' %}
-      </div>
-    </div>
+    <!-- {% include 'partials/footer.html'   %} -->
   </div>
 
-  <script src="{{ url_for('static', filename='assets/libs/jquery/dist/jquery.min.js') }}"></script>
-  <script src="{{ url_for('static', filename='assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
-  <script src="{{ url_for('static', filename='assets/js/sidebarmenu.js') }}"></script>
-  <script src="{{ url_for('static', filename='assets/js/app.min.js') }}"></script>
-  <script src="{{ url_for('static', filename='assets/libs/apexcharts/dist/apexcharts.min.js') }}"></script>
-  <script src="{{ url_for('static', filename='assets/libs/simplebar/dist/simplebar.js') }}"></script>
-  <script src="{{ url_for('static', filename='assets/js/dashboard.js') }}"></script>
-  <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
-  <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap4.min.js"></script>
-  <script>
-    new DataTable('#data');
-    new DataTable('#anomalies');
-  </script>
-  <script>
-    function toggleDropdown() {
-      var dropdownMenu = document.getElementById("dropdownMenu");
-      var chevronIcon = document.querySelector(".chevron-icon i");
-
-      dropdownMenu.classList.toggle("show");
-
-      if (chevronIcon.classList.contains("ti-chevron-down")) {
-        chevronIcon.classList.remove("ti-chevron-down");
-        chevronIcon.classList.add("ti-chevron-up");
-      } else {
-        chevronIcon.classList.remove("ti-chevron-up");
-        chevronIcon.classList.add("ti-chevron-down");
-      }
-    }
-
-  </script>
+  <script src="{{ url_for('static', filename='welcome/js/scripts.js') }}"></script>
 </body>
-
 </html>

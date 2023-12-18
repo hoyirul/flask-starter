@@ -4,11 +4,92 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Login | Data Science | PT. Amerta Indah Otsuka</title>
-  <link rel="shortcut icon" type="image/png" href="{{ url_for('static', filename='assets/images/logos/new-favicon.png') }}" />
-  <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/styles.min.css') }}" />
-</head>
+  <title>Flask Login</title>
+  <style>
+    /* Reset CSS */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
+    /* Global Styles */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f8f9fa;
+      color: #333;
+    }
+
+    .page-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .card {
+      border-radius: 10px;
+      box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.1);
+    }
+
+    .logo-img img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    .text-nowrap {
+      white-space: nowrap;
+    }
+
+    .text-center {
+      text-align: center;
+    }
+
+    .alert {
+      margin-bottom: 15px;
+      padding: 15px;
+      border-radius: 5px;
+    }
+
+    .alert-danger {
+      background-color: #f8d7da;
+      border-color: #f5c6cb;
+      color: #721c24;
+    }
+
+    .card-body {
+      padding: 30px;
+    }
+
+    .form-label {
+      font-weight: bold;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      margin-bottom: 15px;
+    }
+
+    .btn-primary {
+      background-color: #47afc2;
+      color: #fff;
+      border: none;
+      margin-top: 12px;
+      padding: 12px;
+      border-radius: 5px;
+      cursor: pointer;
+      width: 100%;
+      transition: background-color 0.3s ease-in-out;
+    }
+
+    .btn-primary:hover {
+      background-color: #379eb1;
+    }
+
+  </style>
+</head>
 <body>
   <!--  Body Wrapper -->
   <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
@@ -18,12 +99,13 @@
       <div class="d-flex align-items-center justify-content-center w-100">
         <div class="row justify-content-center w-100">
           <div class="col-md-8 col-lg-6 col-xxl-3">
+            <br><br><br><br>
             <div class="card mb-0">
               <div class="card-body">
                 <a href="/" class="text-nowrap logo-img text-center d-block py-3 w-100">
-                  <img src="static/assets/images/logos/mindwise.png" width="225" alt="">
+                  <img src="{{ url_for('static', filename='welcome/img/flask-horizontal.png') }}" width="225" alt="">
                 </a>
-                <p class="text-center">Welcome back to Mindwise AIO</p>
+                <p class="text-center">Flask Login</p>
                 {% if 'errors' in session %}
                   <div class="alert alert-danger" role="alert">
                     {{ session['errors'] }}
@@ -66,9 +148,6 @@
       </div>
     </div>
   </div>
-  
-  <script src="{{ url_for('static', filename='assets/libs/jquery/dist/jquery.min.js') }}"></script>
-  <script src="{{ url_for('static', filename='assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
 </body>
 
 </html>
