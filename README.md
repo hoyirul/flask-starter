@@ -28,7 +28,7 @@ Proyek ini merupakan yang dibangun menggunakan Flask, sebuah framework web Pytho
 
 6. Lalu jalankan (`cp .env.example .env`)
 
-7. Setelah itu generate key dengan menjalankan (`python ./config/generate_key.py`)
+7. Setelah itu generate key dengan menjalankan (`python ./utils/generate_key.py`)
 
 2. Buat database dengan nama yang sesuai dalam MySQL.
 
