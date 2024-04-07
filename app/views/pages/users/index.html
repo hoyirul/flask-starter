@@ -1,0 +1,51 @@
+{% extends 'layouts/main.html' %}
+
+{% block title %}
+  Users Page
+{% endblock %}
+
+{% block content %}
+<section>
+  <div class="container">
+    <h2 class="text-center mb-4">{{ data.title[:-10] }} Table</h2>
+
+    <div class="card mb-3">
+      <div class="card-body">
+        <a href="/users/create" class="btn btn-primary float-right">Add Data</a>
+        <h5 class="card-title float-left">List {{ data.title[:-10] }}</h5>
+
+        <div class="table-responsive mt-5">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Actions</th>
+                {% if data.data %}
+                  {% for key in data.data[0].keys() %}
+                    <th class="text-center">{{ key }}</th>
+                  {% endfor %}
+                {% endif %}
+              </tr>
+            </thead>
+            <tbody>
+              {% for row in data.data %}
+                <tr>
+                  <td>
+                    <form action="" method="POST">
+                      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                      <a href="/users/{{ row['id'] }}/edit" class="btn btn-info btn-sm">Edit</a>
+                      <button type="submit" class="btn btn-danger btn-sm">Delete</button>  
+                    </form>
+                  </td>
+                  {% for value in row.values() %}
+                    <td class="text-center">{{ value }}</td>
+                  {% endfor %}
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

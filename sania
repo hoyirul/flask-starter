@@ -1,0 +1,82 @@
+import sys
+from common.key import Key
+from common.file import File
+from common.string import String
+from app.database.migrations import DatabaseMigration
+from app.database.seeders import DatabaseSeeder
+import time
+
+class Sania:
+    def __init__(self):
+        self.key = Key()
+        self.file = File()
+
+    def generate_file(self, class_name, params):
+        # Isi yang ingin Anda masukkan ke dalam file controller, contoh di sini hanya string kosong
+        file_name = String(class_name).camelcase_to_underscore()
+        file_content = ""
+        # Ganti path sesuai dengan lokasi tempat Anda ingin menyimpan file controller
+        file_path = ''
+        if params == 'controller':
+          model = str(input("Model class name: "))
+          args = str(input("CRUD Controller (y/n)?: "))
+          file_path = f"app/controllers/{file_name}.py"
+          file_content = self.file.controller(class_name=class_name, model_name=model, args=args)
+        if params == 'model':
+          file_path = f"app/models/{file_name}.py"
+          file_content = self.file.model(class_name=class_name)
+        if params == 'middleware':
+          file_path = f"app/middlewares/{file_name}.py"
+        if params == 'migration':
+          file_name = f"m{int(time.time())}_{file_name}"
+          file_path = f"app/database/migrations/{file_name}.py"
+          file_content = self.file.migration(class_name=class_name)
+        if params == 'seeder':
+          file_path = f"app/database/seeders/{file_name}.py"
+          file_content = self.file.seeder(class_name=class_name)
+
+        with open(file_path, 'w') as file:
+            file.write(file_content)
+
+        print(f"File {params} {file_path} telah berhasil dibuat.")
+
+    def run(self, params):
+      if params == 'controller' or params == 'model' or params == 'middleware' or params == 'migration' or params == 'seeder':
+        class_name = str(input("Enter class name: "))
+        self.generate_file(class_name=class_name, params=params)
+      elif params == 'key':
+        self.key.update_secret_key()
+      else:
+        print("No command found")
+
+# Run this file using the command: python database/migration.py migrate
+if __name__ == '__main__':
+    # Membuat objek Generate
+    sania = Sania()
+
+    # Memeriksa argumen baris perintah
+    if len(sys.argv) < 2:
+        print("Usage: python3 sania [make/migrate/seed]")
+        sys.exit(1)
+
+    # Mendapatkan perintah dari argumen baris perintah
+    command = sys.argv[1]
+
+    # Menjalankan perintah sesuai dengan argumen baris perintah yang diberikan
+    if command == 'make':
+        if len(sys.argv) < 3:
+            print("Usage: python3 sania make [controller/model/middleware/migration/seeder]")
+            sys.exit(1)
+        subcommand = sys.argv[2]
+        sania.run(subcommand)
+    elif command == 'migrate':
+        # print("Migrate command")
+        DatabaseMigration().migrate()
+    elif command == 'rollback':
+        # print("Rollback command")
+        DatabaseMigration().rollback()
+    elif command == 'seed':
+        # print("Seed command")
+        DatabaseSeeder().seed()
+    else:
+        print("Unknown command")

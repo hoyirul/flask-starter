@@ -1,0 +1,29 @@
+<!doctype html>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Welcome to Flask</title>
+  <link
+    rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+  />
+  <link rel="stylesheet" href="{{ url_for('public', filename='css/main.css') }}">
+</head>
+<body>
+  <div class="welcome-container">
+
+    <div class="content">
+      <a href="https://flask.palletsprojects.com/en/3.0.x/" target="_blank"><img src="{{ url_for('public', filename='img/flask-horizontal.png') }}" alt=""></a>
+      <div class="title">Welcome To Flask Template</div>
+      <div class="links">
+        <a class="custom-btn" href="https://flask.palletsprojects.com/en/3.0.x/" target="_blank">Documentation</a>
+        <a class="custom-btn" href="https://github.com/hoyirul/flask-starter.git" target="_blank">GitHub</a>
+        <a class="custom-btn" href="https://flask.palletsprojects.com/en/3.0.x/" target="_blank">Flask Framework</a>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="{{ url_for('public', filename='js/main.js') }}"></script>
+</body>
+</html>
